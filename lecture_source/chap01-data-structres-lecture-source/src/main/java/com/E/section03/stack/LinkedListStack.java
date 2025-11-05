@@ -1,4 +1,4 @@
-package come.E.section03.stack;
+package com.E.section03.stack;
 
 import java.util.EmptyStackException;
 
