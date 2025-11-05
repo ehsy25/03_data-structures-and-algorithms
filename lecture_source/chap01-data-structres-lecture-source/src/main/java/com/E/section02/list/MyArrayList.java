@@ -1,4 +1,4 @@
-package come.E.section02.list;
+package com.E.section02.list;
 
 public class MyArrayList<T> {
 
