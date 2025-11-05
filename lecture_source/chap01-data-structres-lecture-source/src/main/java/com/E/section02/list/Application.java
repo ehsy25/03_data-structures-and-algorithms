@@ -1,4 +1,4 @@
-package come.E.section02.list;
+package com.E.section02.list;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
