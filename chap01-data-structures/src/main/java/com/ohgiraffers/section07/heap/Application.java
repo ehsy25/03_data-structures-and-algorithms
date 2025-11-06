@@ -9,5 +9,32 @@ public class Application {
     public static void main(String[] args) {
 
         PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        // 요소 추가
+        minHeap.offer(10);
+        minHeap.offer(5);
+        minHeap.offer(8);
+
+        System.out.println(minHeap);  // [5, 10, 8]
+
+        // 최소값 조회 (큐에서 가장 앞에 있는 값 조회)
+        System.out.println(minHeap.peek());  // 5
+
+        // 최소값 제거
+        System.out.println(minHeap.poll()); // 5
+        System.out.println(minHeap.peek()); // 8
+
+        // 최대힙
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
+
+        // 요소 추가
+        maxHeap.offer(10);
+        maxHeap.offer(5);
+        maxHeap.offer(8);
+        // 최대값 조회(큐에서 가장 앞에 있는 값 조회)
+        System.out.println(maxHeap.peek());
+
+        // 최대값 제거
+        System.out.println(maxHeap.poll());
+        System.out.println(maxHeap.peek());
     }
 }
