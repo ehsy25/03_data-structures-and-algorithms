@@ -18,7 +18,40 @@ public class Practice1 {
     public String solution(Integer[] notes) {
 
         StringBuilder sb = new StringBuilder();
-        Deque<Balloon> deque = new ArrayDeque<>();
+
+        // 풍선을 Deque에 삽입
+        Deque<Balloon> balloons = new ArrayDeque<>();
+        for(int i = 0; i < notes.length; i++){
+            balloons.add(new Balloon(i + 1, notes[i]));
+        }
+        // (1, 3),(2, 2),(3, 1),(4, -3),(5, -1)
+        // 무조건 첫 번째 풍선이 먼저 제거
+        Balloon current = balloons.removeFirst();  // 1회: (1, 3)먼저 제거 .....
+        sb.append(current.order);
+
+        // 3번째 찾기부터 시작... (2, 2),(3, 1),(4, -3),(5, -1)
+        // 모든 풍선이 터질 때까지 반복
+        while(!balloons.isEmpty()){
+
+            // 터진 풍선에 기록 된 이동 값
+            int moveValue = current.noteValue;  // 3값이 처음에 들어온다.
+
+            if(moveValue > 0){
+                // 양수는 오른쪽 이동이므로 이동 값 만큼 앞 요소를 빼서 뒤로 삽입
+                for(int i = 1; i < moveValue; i++){
+                    balloons.addLast(balloons.removeFirst());
+                }
+                current = balloons.removeFirst();
+            } else {
+                // 음수는 왼쪽 이동이므로 이동 값 만큼 뒤 요소를 뺴서 앞으로 삽입
+                for(int i = 1; i < -moveValue; i++){
+                    balloons.addFirst(balloons.removeLast());
+                }
+                current = balloons.removeLast();
+            }
+
+            sb.append(" ").append(current.order);
+        }
 
 
         return sb.toString();
