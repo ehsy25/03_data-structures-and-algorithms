@@ -50,6 +50,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     /* 전위 순회 */
+    /*
+     * 1. Root 노드를방문
+     * 2. 왼쪽서브트리를전위순회
+     * 3. 오른쪽서브트리를전위순회
+     * */
     public List<T> preOrder() {
         List<T> result = new ArrayList<>();
         preOrderRec(root, result);
@@ -65,6 +70,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     /* 중위 순회 */
+    /*
+    * 1. 왼쪽서브트리를중위순회
+    * 2. Root 노드를방문
+    * 3. 오른쪽서브트리를중위순회
+    * */
     public List<T> inOrder() {
         List<T> result = new ArrayList<>();
         inOrderRec(root, result);
@@ -79,6 +89,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
     /* 후위 순회 */
+    /*
+    * 1. 왼쪽서브트리를후위순회
+    * 2. 오른쪽서브트리를후위순회
+    * 3. Root 노드를방문
+    * */
     public List<T> postOrder() {
         List<T> result = new ArrayList<>();
         postOrderRec(root, result);
@@ -100,7 +115,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     private boolean searchRec(Node<T> node, T data) {
         if(node == null) return false;
-        if(data.compareTo(node.data) == 0) return true;
+        if(data.compareTo(node.data) == 0) return true;  // 값을 찾았을때 (동일한 값일경우 0으로 처리)
         return (data.compareTo(node.data) < 0)
                 ? searchRec(node.left, data)
                 : searchRec(node.right, data);
@@ -113,6 +128,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     private Node<T> deleteRec(Node<T> node, T data) {
         if(node == null) return node;
+
         if(data.compareTo(node.data) < 0) {
             node.left = deleteRec(node.left, data);
         }
@@ -142,5 +158,49 @@ public class BinarySearchTree<T extends Comparable<T>> {
             minVal = node.data;
         }
         return minVal;
+    }
+
+    public static void main(String[] args) {
+
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        /*
+        * 트리 구조
+        *             50
+        *            /   \
+        *          30     70
+        *         /  \   /  \
+        *       20   40 60   80
+        * */
+
+
+        bst.insert(50);
+        bst.insert(30);
+        bst.insert(70);
+        bst.insert(20);
+        bst.insert(40);
+        bst.insert(60);
+        bst.insert(80);
+
+        //  [50, 30, 20, 40, 70, 60, 80]
+        System.out.println("전위 순회 : " + bst.preOrder());
+        //  [20, 30, 40, 50, 60, 70, 80]
+        System.out.println("중위 순회 : " + bst.inOrder());
+        //  [20, 40, 30, 60, 80, 70, 50]
+        System.out.println("후위 순회 : " + bst.postOrder());
+
+        // 검색
+        System.out.println("40 검색 : " + bst.search(40));
+        System.out.println("90 검색 : " + bst.search(90));
+
+        /*
+         * 트리 구조
+         *             50
+         *            /   \
+         *          30     70
+         *         /  \   /  \
+         *       20   40 60   80
+         * */
+        bst.delete(20);
+        System.out.println("삭제 후 중위 순회 : " + bst.inOrder());
     }
 }
