@@ -13,6 +13,34 @@ public class Practice2 {
         // 다리의 상태를 표현하는 큐
         Queue<Integer> bridge = new LinkedList<>();
 
-        return 0;
+        // 다리 초기화
+        for (int i = 0; i < w; i++) {
+            bridge.offer(0);
+        }
+
+        int time = 0; // 시간
+        int currentLoad = 0;
+
+        // 트럭이 다리를 모두 지나갈 때까지 반복
+        while(!bridge.isEmpty()) {
+            // 한 번의 반복당 한번의 단위 시간이 소요된다고 가정하여 시간은 증가하고 다리 큐는 제거
+            time++;
+            currentLoad -= bridge.poll();
+
+            // 아직 다리에 진입해야할 트럭이 남았다면
+            if(!trucks.isEmpty()) {
+                // 현재 다리의 하중과 진입할 트럭의 무게를 더했을 때 최대 하중보다 작다면
+                if(currentLoad + trucks.peek() <= l){
+                    int newTruck = trucks.poll();
+                    bridge.offer(newTruck);
+                    currentLoad += newTruck;
+                } else {
+                    // 반대면 진입을 못함
+                    bridge.offer(0);
+                }
+            }
+        }
+
+        return time;
     }
 }
