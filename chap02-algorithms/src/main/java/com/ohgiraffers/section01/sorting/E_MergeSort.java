@@ -19,6 +19,8 @@ public class E_MergeSort {
         mergeSort(arr, temp, 0, arr.length - 1);
         System.out.println("정렬된 배열 : " + Arrays.toString(arr));
 
+        // 객체 타입을 sort하면 TimSort가 동작한다.
+        Arrays.sort(new String[]{"apple",  "banana"});
     }
 
     private static void mergeSort(int[] arr, int[] temp, int left, int right) {
