@@ -1,5 +1,7 @@
 package com.ohgiraffers.section01.sorting;
 
+import java.util.Arrays;
+
 /* 선택 정렬
  * 배열에서 최소값을 찾아 맨 앞과 교환하는 방식의 정렬이다.
  * 배열을 여러 번 반복하면서, 선택한 요소와 나머지 요소들을 비교하여 정렬한다.
@@ -32,7 +34,20 @@ public class B_SelectionSort {
      *    - 64 42 34 29 28 12
      * */
 
-    public static void solution(int length, int[] actual) {
+    public static void solution(int length, int[] arr) {
 
+        for(int i = 0; i < arr.length - 1; i++){
+            System.out.println((i + 1) + "번째 : " + Arrays.toString(arr));
+            int maxIndex = i;
+            for(int j = i + 1; j < arr.length; j++){
+               if(arr[j] > arr[maxIndex]){
+                   maxIndex = j;
+               }
+            }
+            // 선택된 데이터(최소값 or 최대값)가 들어가야할 인덱스로 교환
+            int temp = arr[i];
+            arr[i] = arr[maxIndex];
+            arr[maxIndex] = temp;
+        }
     }
 }
