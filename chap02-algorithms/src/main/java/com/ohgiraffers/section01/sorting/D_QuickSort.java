@@ -20,6 +20,8 @@ public class D_QuickSort {
         quickSort(arr, 0, arr.length - 1);
         System.out.println("정렬된 배열 : " + Arrays.toString(arr));
 
+        // Arrays.sort 기능 내부에서 퀵정렬이 사용된다.
+        Arrays.sort(arr);
     }
 
     private static void quickSort(int[] arr, int low, int high) {
@@ -27,6 +29,8 @@ public class D_QuickSort {
         if(low >= high) return; // 기본 종료 조건
 
         int partitionindex = partition(arr, low, high);
+        quickSort(arr, low, partitionindex - 1);
+        quickSort(arr, partitionindex , high);
 
     }
 
