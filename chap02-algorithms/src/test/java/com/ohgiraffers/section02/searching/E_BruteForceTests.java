@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class E_BruterForceTests {
+class E_BruteForceTests {
 
     static String input1, input2, input3;
     static Integer output1, output2, output3;
