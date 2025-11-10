@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 /* 다익스트라 알고리즘
@@ -56,10 +57,41 @@ public class D_DijkstraAlgorithm {
             int c = Integer.parseInt(st.nextToken());           // 가중치
             graph.get(a).add(new Edge(b, c));
         }
+        /* 우선순위 큐에 Edge가 담겼을 때 우선순위는 가중치가 낮은 순서로 정해진다. */
+        PriorityQueue<Edge> pq = new PriorityQueue<>();
+        pq.offer(new Edge(start, 0));
+        dis[start] = 0;
 
+        while(!pq.isEmpty()){
+            Edge tmp = pq.poll();
+            int now = tmp.ver;
+            int nowCost = tmp.cost;
 
+            if(nowCost > dis[now]) continue;
 
+            /* 기준 정점과 연결 된 이웃 정점을 큐에 추가 하는 반복문 */
+            for(Edge edge : graph.get(now)){
+                /* 거리를 기록해두는 배열에 저장 된 값이 현재 비용과 간선을 타고
+                * 가는 비용을 더한 값보다 더크다면
+                * */
+                if(dis[edge.ver] > nowCost + edge.cost){
+                    /* 새로운 루트로 업데이트 한다.*/
+                    dis[edge.ver] = nowCost + edge.cost;
+                    pq.offer(new Edge(edge.ver, nowCost + edge.cost));
+                }
+            }
+        }
 
-        return "";
+        StringBuilder sb = new StringBuilder();
+        for(int i = 2; i < dis.length; i++){
+            if(dis[i] != Integer.MAX_VALUE){
+                sb.append(dis[i]);
+            } else {
+                sb.append("impossible");
+            }
+            sb.append(" ");
+        }
+
+        return sb.toString().trim();
     }
 }
