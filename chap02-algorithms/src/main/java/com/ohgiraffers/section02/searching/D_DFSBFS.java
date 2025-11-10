@@ -34,13 +34,41 @@ public class D_DFSBFS {
 
         sb = new StringBuilder();
 
-        //dfs(start);
+        dfs(start);
         sb.append("\n");
 
         /* 위의 호출에서 사용 된 방문 배열을 reset */
         visit = new boolean[node + 1];
 
-        //bfs(start);
+        bfs(start);
         return sb.toString();
+    }
+
+    private static void bfs(int start) {
+        q.offer(start);
+        visit[start] = true;
+
+        while(!q.isEmpty()) {
+            start = q.poll();
+            sb.append(start).append(" ");
+
+            for(int i = 1; i <= node; i++) {
+                if(map[start][i] == 1 && !visit[i]){
+                    q.offer(i);
+                    visit[i] = true;
+                }
+            }
+        }
+    }
+
+    private static void dfs(int start) {
+        visit[start] = true;
+        sb.append(start).append(" ");
+
+        for(int i = 1; i <= node; i++){
+            if(map[start][i] == 1 && !visit[i]){
+                dfs(i);
+            }
+        }
     }
 }
