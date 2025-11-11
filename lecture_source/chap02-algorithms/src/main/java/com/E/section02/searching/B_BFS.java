@@ -8,7 +8,7 @@ import java.util.Queue;
  * 선입 선출 구조의 queue를 활용한다.
  * 시작 노드에서 출발해서 시작 노드를 기준으로 가까운 노드를 먼저 방문하면서 탐색하는 알고리즘이다.
  * */
-public class B_B FS {
+public class B_BFS {
 
     /* 배추 밭에 필요한 배추 지렁이 갯수 구하는 문제
      *  (x, y좌표를 활용한 탐색 문제를 해결할 수 있다.)
