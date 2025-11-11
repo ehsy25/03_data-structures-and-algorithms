@@ -14,11 +14,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-/*
-* 백준(1197)
-* https://www.acmicpc.net/problem/1197
-* */
-class F_KruskalAlgorithmTests {
+class G_PrimAlgorithmTests {
 
     static String input1, input2;
     static Long output1, output2;
@@ -31,6 +27,7 @@ class F_KruskalAlgorithmTests {
                 "2 3 2\n" +
                 "1 3 3";
         output1 = 3L;
+
 
         input2 = "5 7\n" +
                 "1 2 2\n" +
@@ -51,13 +48,12 @@ class F_KruskalAlgorithmTests {
         );
     }
 
-
-    @DisplayName("KruskalAlgorithm")
+    @DisplayName("PrimAlgorithm")
     @Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
     @ParameterizedTest
     @MethodSource("provideSource")
-    public void kruskalAlgorithmTest(String input, Long output) throws IOException {
-        Long result = F_KruskalAlgorithm.solution(input);
+    public void primAlgorithmTest(String input, Long output) throws IOException {
+        Long result = G_PrimAlgorithm.solution(input);
         Assertions.assertEquals(output, result);
     }
 }

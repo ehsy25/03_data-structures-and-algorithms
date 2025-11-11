@@ -1,5 +1,11 @@
 package com.ohgiraffers.section03.greedy;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
 /*
 * 최소 신장 트리
 * 주어진 그래프의 모든 정점을 연결하는 부분 그래프 중 가중치의 값이 최소인 트리
@@ -48,8 +54,42 @@ public class F_KruskalAlgorithm {
         }
     }
 
-    public static Long solution(String input) {
-        return 0l;
+    public static Long solution(String input) throws IOException {
+        BufferedReader br = new BufferedReader(new StringReader(input));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int V = Integer.parseInt(st.nextToken());      // 노드갯수
+        int E = Integer.parseInt(st.nextToken());      // 간선갯수
+
+        Edge[] edges = new Edge[E];
+        for(int i = 0; i < E; i++){
+            st = new StringTokenizer(br.readLine());
+            int u = Integer.parseInt(st.nextToken());           // 정점1
+            int v = Integer.parseInt(st.nextToken());           // 정점2
+            int weight = Integer.parseInt(st.nextToken());      // 가중치
+            edges[i] = new Edge(u, v, weight);
+        }
+
+        parent = new int[V + 1];
+        for(int i = 1; i <= V; i++){
+            parent[i] = i;
+        }
+
+        // 1. 가중치 오름차순 정렬(기준은 내부에 정의되어있다)
+        Arrays.sort(edges);
+
+        long totalWeight = 0L;
+
+        // 2. 가중치 작은 간선부터 선택해나가는 작업
+        for(Edge edge : edges){
+            // 각각의 정점이 연결되어 있는지 확인
+            if(find(edge.u) != find(edge.v)){
+                // 연결되어 있지 않다면 정점을 연결
+                union(edge.u, edge.v);
+                totalWeight += edge.weight;
+            }
+        }
+
+        return totalWeight;
     }
 
 }
