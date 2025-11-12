@@ -43,14 +43,12 @@ class F_KruskalAlgorithmTests {
         output2 = 17L;
 
     }
-
     public static Stream<Arguments> provideSource() {
         return Stream.of(
                 arguments(input1, output1),
                 arguments(input2, output2)
         );
     }
-
 
     @DisplayName("KruskalAlgorithm")
     @Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)

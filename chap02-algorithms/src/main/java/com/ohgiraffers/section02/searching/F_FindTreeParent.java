@@ -74,9 +74,6 @@ public class F_FindTreeParent {
                 }
             }
         }
-
-
-
     }
 
     private static void dfs(int parentNode) {
